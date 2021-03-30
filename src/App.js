@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import MyFavoriteBooks from './components/MyFavoriteBooks.js';
-import IsLoadingAndError from './IsLoadingAndError';
+import IsLoadingAndError from './components/IsLoadingAndError.js';
 import Footer from './Footer';
 import {
   BrowserRouter as Router,
