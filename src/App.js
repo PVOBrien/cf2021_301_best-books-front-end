@@ -15,7 +15,7 @@ class App extends React.Component {
     return(
       <>
         <Router>
-          <IsLoadingAndError>
+          {/* <IsLoadingAndError> */}
             <Header />
               <Switch>
                 <Route exact path="/">
@@ -24,7 +24,7 @@ class App extends React.Component {
                 {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
               </Switch>
             <Footer />
-          </IsLoadingAndError>
+          {/* </IsLoadingAndError> */}
         </Router>
       </>
     )
