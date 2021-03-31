@@ -11,6 +11,7 @@ class Header extends React.Component {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <LoginButton />
+        <AddBookButton />
         <Navbar.Brand>My Favorite Books</Navbar.Brand>
         <Link to="/">Home</Link>
         {console.log(this.props.auth0)}
