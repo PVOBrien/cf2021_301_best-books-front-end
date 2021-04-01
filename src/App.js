@@ -17,7 +17,7 @@ class App extends React.Component {
     this.state = {
       userName: '',
       currentItem: '',
-      isDisplayed: true,
+      isDisplayed: false,
     };
   }
 
