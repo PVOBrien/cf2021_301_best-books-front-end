@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import './css/header.css';
 import LoginButton from './LoginButton.js';
 import { withAuth0 } from '@auth0/auth0-react';
+// import AddBookButton from './components/AddBookButton.js'
 
 class Header extends React.Component {
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <LoginButton />
-        <AddBookButton />
+        {/* <AddBookButton /> */}
         <Navbar.Brand>My Favorite Books</Navbar.Brand>
         <Link to="/">Home</Link>
         {console.log(this.props.auth0)}

@@ -10,8 +10,8 @@ ReactDOM.render(
     domain="dev-cf2021-301.us.auth0.com"
     clientId="iAXLO1ce5r45N1h4Ibcp8F6fjI6mSoIk"
     // redirectUri="https://relaxed-booth-08253f.netlify.app/"
-    // redirectUri="http://localhost:3000/"
-    redirectUri={window.location.origin} // redirectUri this all is a source for incorrect state upon login attempt. 
+    redirectUri="http://localhost:3000/"
+    // redirectUri={window.location.origin} // redirectUri this all is a source for incorrect state upon login attempt. 
   >
     <App />
   </Auth0Provider>,

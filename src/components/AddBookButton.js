@@ -13,3 +13,5 @@ class AddBookButton extends React.Component {
 //     // )
 //   } 
 }
+
+export default AddBookButton;
