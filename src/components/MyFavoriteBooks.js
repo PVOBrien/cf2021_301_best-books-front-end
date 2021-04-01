@@ -37,7 +37,7 @@ class MyFavoriteBooks extends React.Component {
 
     const delItem = await axios.delete(`${SERVER}/item/${index}`, { params: { theUserId: this.state.userId } });
     console.log(delItem);
-    // this.setState({ books: delItem.data})
+    this.setState({ books: delItem.data.books});
 
     // const newItemsArray = this.state..filter((item, i) => {
       // return index !== i; // why are we getting rid of just the one selected right now?
