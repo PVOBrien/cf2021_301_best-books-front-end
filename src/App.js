@@ -1,11 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import MyFavoriteBooks from './components/MyFavoriteBooks.js';
-<<<<<<< HEAD
-import IsLoadingAndError from './components/IsLoadingAndError';
-=======
 import IsLoadingAndError from './components/IsLoadingAndError.js';
->>>>>>> b49e5d588a4530ca4350bd528cfe0606eae3ded8
 import Footer from './Footer';
 import {
   BrowserRouter as Router,
