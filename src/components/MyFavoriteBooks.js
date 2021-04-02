@@ -16,7 +16,11 @@ class MyFavoriteBooks extends React.Component {
       email: '',
       bookName: '',
       updateFormIsShown: false,
-      chosenBook: {}
+      indexOfChosen: 0,
+      chosenBook: {},
+      userId: '',
+      bookNameToUpdate: '',
+      bookDescriptionToUpdate: ''
     }
   }
 
@@ -32,15 +36,39 @@ class MyFavoriteBooks extends React.Component {
     }
   }
 
+  handleOnChange = (e) => {
+    const targetName = e.target.name;
+    const targetValue = e.target.value;
+    console.log('targetName:', targetName);
+    console.log('targetValue:', targetValue);
+    this.setState({ [targetName]: targetValue})
+  }
+
+  handleOnSubmit = (e) => {
+    e.preventDefault();
+    console.log('BUMP in hOS');
+    const book = {
+      description: this.state.bookDescriptionToUpdate,
+      name: this.state.bookNameToUpdate,
+      status: "TBD"
+    }
+
+    console.log('the index:', this.state.indexOfChosen);
+    console.log('the newBook:', book);
+    console.log('all the books', this.state.books);
+    this.state.books.splice(this.state.indexOfChosen, 1, book);
+    // console.log('newBooks:', newBooks);
+    // this.setState({books: newBooks});
+    this.setState({updateFormIsShown: false});
+  }
+
   getid = (theId) => { this.setState({ userId: theId }) };
 
   displayUpdateForm = (theIndex) => {
     this.setState({ updateFormIsShown: true });
     const selectedBook = this.state.books[theIndex];
-    console.log('selectedbook', selectedBook);
-    this.setState({ chosenBook: selectedBook })
+    this.setState({ chosenBook: selectedBook, indexOfChosen: theIndex })
   };
-
   closeUpdateForm = () => { this.setState({ updateFormIsShown: false }) };
 
   deleteItem = async (index) => {
@@ -68,7 +96,7 @@ class MyFavoriteBooks extends React.Component {
                 <Button onClick={() => { this.displayUpdateForm(index) }}>Edit Item</Button>
                 <h3>{book.name}</h3>
                 <p>{book.description}</p>
-                <Button onClick={() => { this.deleteItem(index) }}>Delete</Button>
+                <Button variant="danger" onClick={() => { this.deleteItem(index) }}>Delete</Button>
               </div>
             )
           })}
@@ -76,6 +104,10 @@ class MyFavoriteBooks extends React.Component {
               bookToEdit={this.state.chosenBook}
               isShown={this.state.updateFormIsShown}
               unShow={this.closeUpdateForm}
+              bookNToUpdate={this.state.bookNameToUpdate}
+              updateState={this.handleOnChange}
+              descToUpdate={this.state.bookDescriptionToUpdate}
+              executeUpdate={this.handleOnSubmit}
             />
         </Jumbotron>
       </>

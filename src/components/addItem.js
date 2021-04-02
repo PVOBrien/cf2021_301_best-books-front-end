@@ -15,11 +15,12 @@ class AddItem extends React.Component {
     }
   }
 
-  handleOnChange = (e) => {
-    const target = e.target;
-    const name = e.target.name;
-    const value = target.value;
-  }
+  // handleOnChange = (e) => {
+  //   const target = e.target;
+  //   const name = e.target.name;
+  //   const value = target.value;
+  //   console.log('name: ', name + ' and value:', value);
+  // }
 
   render() {
     return (
@@ -38,7 +39,7 @@ class AddItem extends React.Component {
                   name="bookName"
                   type="text"
                   placeholder="book name"
-
+                  onChange={(e) => this.handleOnChange(e.target)}
                 />
                 {/* <Form.Text className="text-muted"> We'll never share your email with anyone else.</Form.Text> */}
               </Form.Group>
