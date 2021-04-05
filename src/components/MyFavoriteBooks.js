@@ -32,7 +32,7 @@ class MyFavoriteBooks extends React.Component {
       this.setState({ books: books.data.books, userId: books.data._id });
       console.log(books.data._id);
     } catch (error) {
-      console.log(error);
+      console.log('Ah! An Error!',error);
     }
   }
 
@@ -44,21 +44,28 @@ class MyFavoriteBooks extends React.Component {
     this.setState({ [targetName]: targetValue})
   }
 
-  handleOnSubmit = (e) => {
+  handleOnSubmit = async(e) => {
+    const SERVER = process.env.REACT_APP_SERVER_URL;
     e.preventDefault();
     console.log('BUMP in hOS');
-    const book = {
+    const thisBook = {
       description: this.state.bookDescriptionToUpdate,
       name: this.state.bookNameToUpdate,
       status: "TBD"
     }
 
+    let idToSend = this.state.userId;
+
     console.log('the index:', this.state.indexOfChosen);
-    console.log('the newBook:', book);
+    console.log('the newBook:', thisBook);
     console.log('all the books', this.state.books);
-    this.state.books.splice(this.state.indexOfChosen, 1, book);
-    // console.log('newBooks:', newBooks);
-    // this.setState({books: newBooks});
+    this.state.books.splice(this.state.indexOfChosen, 1, thisBook); // this works IN PLACE. No need to hold the results in a variable. So... this sets state?
+
+    const updatedBooksArr = await axios.put(`${SERVER}/item/${this.state.indexOfChosen}`, {bookToAdd: thisBook, idOfUser: idToSend});
+
+    console.log(updatedBooksArr);
+    this.setState({ books: updatedBooksArr});
+
     this.setState({updateFormIsShown: false});
   }
 
