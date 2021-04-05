@@ -20,7 +20,8 @@ class MyFavoriteBooks extends React.Component {
       chosenBook: {},
       userId: '',
       bookNameToUpdate: '',
-      bookDescriptionToUpdate: ''
+      bookDesc: '',
+      bookStat: ''
     }
   }
 
@@ -36,12 +37,38 @@ class MyFavoriteBooks extends React.Component {
     }
   }
 
+  handleDropDownChange = (e) => {
+    const newStatus = e;
+    this.setState({ bookStat: newStatus});
+  }
+
   handleOnChange = (e) => {
     const targetName = e.target.name;
     const targetValue = e.target.value;
     console.log('targetName:', targetName);
     console.log('targetValue:', targetValue);
     this.setState({ [targetName]: targetValue})
+  }
+
+  handleOnSubmitNew = async(e) => {
+    const SERVER = process.env.REACT_APP_SERVER_URL;
+    e.preventDefault();
+    console.log('BUMP in hOS.NEW');
+    const thisBook = {
+      description: this.state.bookDesc,
+      name: this.state.bookName,
+      status: this.state.bookStat
+    }
+    console.log(thisBook);
+
+    let idToSend = this.state.userId
+
+    const updatedBooksArr = await axios.post(`${SERVER}/postRoute`, { params: {name: idToSend, newBook: thisBook}});
+
+    console.log(updatedBooksArr);
+
+    this.setState({ books: updatedBooksArr.data});
+
   }
 
   handleOnSubmit = async(e) => {
@@ -51,7 +78,7 @@ class MyFavoriteBooks extends React.Component {
     const thisBook = {
       description: this.state.bookDescriptionToUpdate,
       name: this.state.bookNameToUpdate,
-      status: "TBD"
+      status: this.state.bookStat
     }
 
     let idToSend = this.state.userId;
@@ -64,7 +91,7 @@ class MyFavoriteBooks extends React.Component {
     const updatedBooksArr = await axios.put(`${SERVER}/item/${this.state.indexOfChosen}`, {bookToAdd: thisBook, idOfUser: idToSend});
 
     console.log(updatedBooksArr);
-    this.setState({ books: updatedBooksArr});
+    this.setState({ books: updatedBooksArr.data});
 
     this.setState({updateFormIsShown: false});
   }
@@ -75,6 +102,7 @@ class MyFavoriteBooks extends React.Component {
     this.setState({ updateFormIsShown: true });
     const selectedBook = this.state.books[theIndex];
     this.setState({ chosenBook: selectedBook, indexOfChosen: theIndex })
+    console.log('the chosen', this.state.chosenBook);
   };
   closeUpdateForm = () => { this.setState({ updateFormIsShown: false }) };
 
@@ -90,7 +118,11 @@ class MyFavoriteBooks extends React.Component {
       <>
         <AddItem
           modalIsDisplayedToAI={this.props.modalIsDisplayedToMFB}
-          closeModaldowntoAI={this.props.closeModal} />
+          closeModaldowntoAI={this.props.closeModal}
+          changeFromParent={this.handleOnChange}
+          dDChangeFromPar={this.handleDropDownChange}
+          newSubmit={this.handleOnSubmitNew}
+          />
         <Jumbotron>
           <Button variant="outline-primary" onClick={this.props.openModal}>Add a Book</Button>{' '}
           <div>

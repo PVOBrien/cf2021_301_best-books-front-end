@@ -28,35 +28,48 @@ class AddItem extends React.Component {
         <Modal show={this.props.modalIsDisplayedToAI}
         onHide={this.props.closeModaldowntoAI}>
           <Modal.Header onClick={this.props.closeModaldowntoAI} closeButton>
-            <Modal.Title>Modal title</Modal.Title>
+            <Modal.Title>Add a New Book</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
-            <Form>
+            <Form onSubmit={this.props.newSubmit}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Book Name</Form.Label>
                 <Form.Control
                   name="bookName"
                   type="text"
-                  placeholder="book name"
-                  onChange={(e) => this.handleOnChange(e.target)}
+                  placeholder="Enter name of book"
+                  onChange={(e) => this.props.changeFromParent(e)}
                 />
                 {/* <Form.Text className="text-muted"> We'll never share your email with anyone else.</Form.Text> */}
               </Form.Group>
 
               <Form.Group controlId="formBasicPassword">
-                <Form.Label>Description</Form.Label>
-                <Form.Control type="text" />
+                <Form.Label>Book Description</Form.Label>
+                <Form.Control
+                  name="bookDesc"
+                  type="text"
+                  placeholder='Enter description of book'
+                  onChange={(e) => this.props.changeFromParent(e)}
+                />
               </Form.Group>
 
-              <Dropdown>
+              <Dropdown
+                name="Dropdown"
+                onSelect={this.props.dDChangeFromPar}
+              >
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   Status
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu>
-                  <Dropdown.Item>Have Read</Dropdown.Item>
-                  <Dropdown.Item>Want to Read</Dropdown.Item>
+                  <Dropdown.Item
+                    name="dropdown"
+                    eventKey="Have Read"
+                  >Have Read</Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Want to Read">
+                      Want to Read
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
 
