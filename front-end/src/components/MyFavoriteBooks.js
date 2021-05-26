@@ -59,7 +59,7 @@ class MyFavoriteBooks extends React.Component {
 
     let idToSend = this.state.userId
 
-    const updatedBooksArr = await axios.post(`${SERVER}/postRoute`, { params: {name: idToSend, newBook: thisBook}});
+    const updatedBooksArr = await axios.post(`${SERVER}/postRoute`, { params: {name: idToSend, newBook: thisBook}}); // does not require params:, can have just an object of key value params.
 
 
     this.setState({ books: updatedBooksArr.data});
